@@ -1,8 +1,46 @@
+<!DOCTYPE html>
+<!--
+    Actual Temp, Feels Like, MinMax Description
+    High / Low - Humidity - Wind - UV Index - Visibility
+    Sun Up/Down?
+-->
 <html>
   <head>
     <title>Jake's Weather App!</title>
     <link rel="stylesheet" href="index.css" />
   </head>
-  <body></body>
+  <body>
+    <div class="flex-container">
+      <div class="card main-weather">
+        <div class="temp-container">
+          <h1 id="current-temp">69°</h1>
+          <span id="weather-description">Sunny</span>
+          <div class="feels-like-temp">
+            Feels Like <span id="feelslike-temp">69°</span>
+          </div>
+          <div class="min-max-container">High / Low 
+            <div class="min-max-temp">
+                <span id="min-temp">73°</span>
+                /
+                <span id="max-temp">42°</span>
+          </div>
+          <div class="weather-image-container"><img src="content/weather.png" alt="Current Weather"></div>
+        </div>
+      </div>
+      <div class="card detail-weather">
+        <div class="info-container detail1">
+            <div class="info humidity-detail"><span id="humidity">41</span>%</div>
+            <div class="info wind-detail"><span id="wind">4</span> mph</div>
+        </div>
+        <div class="info-container detail2">
+            <div class="info uv-detail"><span id="uv">7</span> out of 10</div>
+            <div class="info visibility-detail"><span id="visibility">10</span> mi</div>
+        </div>
+      </div>
+      <!-- TBD
+        <div class="card 5day-weather"></div>
+      -->
+    </div>
+  </body>
   <script type="text/javascript" src="src/index.js"></script>
 </html>
