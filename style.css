@@ -183,6 +183,17 @@ body {
   /* justify-content: center; */
 }
 
+.search-input {
+  background-image: url("/content/search.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center right; /* adjust the position of the image */
+  height: auto;
+  border-radius: 0.4rem;
+  padding: 0.25rem;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+}
+
 @media only screen and (max-width: 570px) {
   .l {
     margin-right: 3px;
