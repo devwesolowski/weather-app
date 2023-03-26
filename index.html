@@ -7,34 +7,61 @@
 <html>
   <head>
     <title>Jake's Weather App!</title>
-    <link rel="stylesheet" href="index.css" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;0,900;1,300;1,400;1,500;1,700;1,900&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
     <div class="flex-container">
       <div class="card main-weather">
         <div class="temp-container">
-          <h1 id="current-temp">69°</h1>
-          <span id="weather-description">Sunny</span>
-          <div class="feels-like-temp">
-            Feels Like <span id="feelslike-temp">69°</span>
+          <div class="current-container">
+            <span id="current-temp">69°</span>
+            <span id="weather-description">Sunny</span>
+            <div class="feels-like-temp">
+              Feels Like <span id="feels-like-temp">69°</span>
+            </div>
           </div>
-          <div class="min-max-container">High / Low 
+
+          <div class="min-max-container">
+            <span id="high-low-text"
+              >High&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Low</span
+            >
             <div class="min-max-temp">
-                <span id="min-temp">73°</span>
-                /
-                <span id="max-temp">42°</span>
+              <span id="min-temp">73°</span>
+
+              <span id="max-temp">42°</span>
+            </div>
           </div>
-          <div class="weather-image-container"><img src="content/weather.png" alt="Current Weather"></div>
         </div>
+        <img
+          src="content/weather.png"
+          alt="Current Weather"
+          id="weather-icon"
+        />
       </div>
       <div class="card detail-weather">
-        <div class="info-container detail1">
-            <div class="info humidity-detail"><span id="humidity">41</span>%</div>
-            <div class="info wind-detail"><span id="wind">4</span> mph</div>
+        <div class="list-item l humidity-detail">
+          Humidity
+          <div class="list-details"><span id="humidity">41</span>%</div>
         </div>
-        <div class="info-container detail2">
-            <div class="info uv-detail"><span id="uv">7</span> out of 10</div>
-            <div class="info visibility-detail"><span id="visibility">10</span> mi</div>
+        <div class="list-item r wind-detail">
+          Wind
+          <div class="list-details"><span id="wind">4</span>&nbsp;mph</div>
+        </div>
+        <div class="list-item l uv-detail">
+          UV Index
+          <div class="list-details"><span id="uv">7</span>&nbsp;out of 10</div>
+        </div>
+        <div class="list-item r visibility-detail">
+          Visibility
+          <div class="list-details">
+            <span id="visibility">10</span>&nbsp;mi
+          </div>
         </div>
       </div>
       <!-- TBD

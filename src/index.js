@@ -1,1 +1,11 @@
 const api = "https://api.openweathermap.org/data/2.5/weather";
+let currentTemp;
+let weatherDescription;
+let feelsLikeTemp;
+let minTemp;
+let maxTemp;
+let weatherIcon;
+let humidity;
+let wind;
+let uvIndex;
+let visibility;
