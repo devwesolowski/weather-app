@@ -1,2 +1,7 @@
 # weather-app
-Basic Weather Application Utilizing API
+
+JS Weather Application Utilizing OpenWeatherMap API
+
+## Expected Outcome
+
+![Alt text](/content/jsWeatherAppImage.png "Completed Design and Information")
