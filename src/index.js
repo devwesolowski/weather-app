@@ -145,6 +145,7 @@ function convertDate(dt) {
 }
 
 function renderForecast(data) {
+  console.log(data);
   const list = document.querySelector(".daily-weather-list");
   const weatherColumn = document.createElement("li");
   weatherColumn.className = "weather-column";
@@ -177,14 +178,30 @@ function renderForecast(data) {
 
   //TODO Logic for Images
   const dailyWeatherIcon = document.createElement("img");
-  dailyWeatherIcon.src = "content/thunderstorms.png";
   dailyWeatherIcon.alt = "Daily Weather";
   dailyWeatherIcon.className = "daily-weather-icon";
-
+  dailyWeatherIcon.src = getWeatherIcon(data.weather[0].main);
+  console.log(data.weather[0].main);
   list.append(weatherColumn);
   weatherColumn.append(columnWrapper);
   columnWrapper.append(dailyLabel, dailyTempMax, dailyTempMin, dailyIcon);
   dailyTempMax.append(tempMaxValue);
   dailyTempMin.append(tempMinValue);
   dailyIcon.append(dailyWeatherIcon);
+}
+
+function getWeatherIcon(weather) {
+  switch (weather) {
+    case "Clear":
+      return "content/sunny.png";
+    case "Clouds":
+      return "content/cloudy.png";
+    case "Rain":
+      return "content/showers.png";
+    case "Thunderstorm":
+      return "content/thunderstorms.png";
+    case "Snow":
+      return "content/snow.png";
+  }
+  return null;
 }
