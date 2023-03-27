@@ -190,6 +190,7 @@ function renderForecast(data) {
   dailyIcon.append(dailyWeatherIcon);
 }
 
+//TODO, use decription and get more advance with icons
 function getWeatherIcon(weather) {
   switch (weather) {
     case "Clear":
