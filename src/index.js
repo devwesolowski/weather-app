@@ -3,17 +3,30 @@ const test =
   "https://api.openweathermap.org/data/2.5/weather?zip=75071&appid=459bd017a00570fbff9c558c8f7a9bce&units=imperial";
 const token = "";
 const zip = 75071;
+const searchbar = document.getElementById("searchbar");
 
 document.addEventListener("DOMContentLoaded", () => {
   getWeather(zip);
-  requestForecast(zip);
+  getForecast(zip);
+
+  //TODO Logic to check zip code is valid 5 digit before sending through.
+  //TODO Also logic what to do if zipcode is invalid, DONT load anything.
+
+  searchbar.addEventListener("keydown", function (event) {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      console.log(`Grabbing Weather for zip: ${searchbar.value}`);
+      getWeather(searchbar.value);
+      pushForecast(searchbar.value);
+    }
+  });
 });
 
-//TODO Weather Description, Logo (bonus background)
+//TODO Background at Night and Night Logos
 // grabs the mock data we have saved for now, assigns it to variable for use
 function getWeather(zip) {
-  // fetch(`${api}/weather?zip=${zip}&appid=${token}&units=imperial`)
-  fetch("mockWeather.json")
+  fetch(`${api}/weather?zip=${zip}&appid=${token}&units=imperial`)
+    // fetch("mockWeather.json")
     .then((response) => response.json())
     .then((data) => {
       document.getElementById("location").textContent = data.name + " Weather";
@@ -44,14 +57,17 @@ function getWeather(zip) {
       document.getElementById("weather-icon").src = getWeatherIcon(
         data.weather[0].description
       );
+
+      console.log(`Todays Weather Rendered`);
+      console.log(data);
     })
     .catch((error) => console.error(error));
 }
 
 //requests and parses forecast data
-function requestForecast(zip) {
-  // fetch(`${api}/weather?zip=${zip}&appid=${token}&units=imperial`)
-  fetch("mockForecast.json")
+function getForecast(zip) {
+  fetch(`${api}/forecast?zip=${zip}&appid=${token}&units=imperial`)
+    // fetch("mockForecast.json")
     .then((response) => response.json())
     .then((data) => {
       //first filters through object to pull arrays where time matches 1PM
@@ -71,8 +87,20 @@ function requestForecast(zip) {
 
       //runs through each array and renders using its data
       filteredData.forEach((n) => renderForecast(n));
+      console.log(`Weeks Forecast Rendered`);
     })
     .catch((error) => console.error(error));
+}
+
+function pushForecast(zip) {
+  const weatherColumn = document.querySelector("ul.daily-weather-list");
+  console.log(weatherColumn);
+  // Remove all child nodes of the ul element
+  while (weatherColumn.firstChild) {
+    weatherColumn.removeChild(weatherColumn.firstChild);
+  }
+  console.log(`Deleted Old HTML, Rendering New`);
+  getForecast(zip);
 }
 
 function getLowHighTemp(data) {
@@ -217,7 +245,7 @@ function getWeatherIcon(weather) {
 function parseWeatherDescription(weather) {
   switch (weather) {
     case "clear sky":
-      return "Sunny";
+      return "Clear Sky";
     case "few clouds":
       return "Partly Sunny";
     case "scattered clouds":
