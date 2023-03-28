@@ -1,15 +1,18 @@
 const api = "https://api.openweathermap.org/data/2.5";
-const apiWeather = "/weather";
-const apiForecast = "/forecast";
+const test =
+  "https://api.openweathermap.org/data/2.5/weather?zip=75071&appid=459bd017a00570fbff9c558c8f7a9bce&units=imperial";
+const token = "";
+const zip = 75071;
 
 document.addEventListener("DOMContentLoaded", () => {
-  getWeather();
-  requestForecast();
+  getWeather(zip);
+  requestForecast(zip);
 });
 
 //TODO Weather Description, Logo (bonus background)
 // grabs the mock data we have saved for now, assigns it to variable for use
-function getWeather() {
+function getWeather(zip) {
+  // fetch(`${api}/weather?zip=${zip}&appid=${token}&units=imperial`)
   fetch("mockWeather.json")
     .then((response) => response.json())
     .then((data) => {
@@ -46,21 +49,17 @@ function getWeather() {
 }
 
 //requests and parses forecast data
-function requestForecast() {
+function requestForecast(zip) {
+  // fetch(`${api}/weather?zip=${zip}&appid=${token}&units=imperial`)
   fetch("mockForecast.json")
     .then((response) => response.json())
     .then((data) => {
-      //TODO: Get Todays DAY and if result matches today, ignore it in the filter
-      //We technically dont have low history from the API for today, only continuing
-      //for the remainder of the day
-
       //first filters through object to pull arrays where time matches 1PM
       //we are getting the data for 5 day at 1pm each day
       const filteredData = data.list
         .filter((item) => getTime(item.dt) === "1:00 PM")
         .map((item) => item);
-      // const todaysData = data.list
-      // .filter((item, i)) => [0].includes)
+
       const lowHighTemp = getLowHighTemp(data);
 
       //Filters through each key in the filteredData JSON object, then applies
@@ -141,8 +140,8 @@ function convertDate(dt) {
   return newDate;
 }
 
+//builds and injects daily forecast
 function renderForecast(data) {
-  console.log(data);
   const list = document.querySelector(".daily-weather-list");
   const weatherColumn = document.createElement("li");
   weatherColumn.className = "weather-column";
@@ -167,18 +166,15 @@ function renderForecast(data) {
   tempMaxValue.className = "temp-max-value";
   tempMaxValue.textContent = Math.floor(data.temp_max) + "°";
 
-  //TODO Just noticed temp_min is same for each... may need to do additional logic to pull two arrays
-  // one with min temp for the day and one with max temp for the day
   const tempMinValue = document.createElement("span");
   tempMinValue.className = "temp-min-value";
   tempMinValue.textContent = Math.floor(data.temp_min) + "°";
 
-  //TODO Logic for Images
   const dailyWeatherIcon = document.createElement("img");
   dailyWeatherIcon.alt = "Daily Weather";
   dailyWeatherIcon.className = "daily-weather-icon";
   dailyWeatherIcon.src = getWeatherIcon(data.weather[0].description);
-  console.log(data.weather[0].description);
+
   list.append(weatherColumn);
   weatherColumn.append(columnWrapper);
   columnWrapper.append(dailyLabel, dailyTempMax, dailyTempMin, dailyIcon);
@@ -187,7 +183,6 @@ function renderForecast(data) {
   dailyIcon.append(dailyWeatherIcon);
 }
 
-//TODO, use decription and get more advance with icons
 function getWeatherIcon(weather) {
   switch (weather) {
     case "sky is clear":
