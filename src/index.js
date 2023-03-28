@@ -2,18 +2,6 @@ const api = "https://api.openweathermap.org/data/2.5";
 const apiWeather = "/weather";
 const apiForecast = "/forecast";
 
-// let currentTemp;
-// let weatherDescription;
-// let feelsLikeTemp;
-// let minTemp;
-// let maxTemp;
-// let weatherIcon;
-// let humidity;
-// let wind;
-// let uvIndex;
-// let visibility;
-// let location;
-
 document.addEventListener("DOMContentLoaded", () => {
   getWeather();
   requestForecast();
@@ -180,8 +168,8 @@ function renderForecast(data) {
   const dailyWeatherIcon = document.createElement("img");
   dailyWeatherIcon.alt = "Daily Weather";
   dailyWeatherIcon.className = "daily-weather-icon";
-  dailyWeatherIcon.src = getWeatherIcon(data.weather[0].main);
-  console.log(data.weather[0].main);
+  dailyWeatherIcon.src = getWeatherIcon(data.weather[0].description);
+  console.log(data.weather[0].description);
   list.append(weatherColumn);
   weatherColumn.append(columnWrapper);
   columnWrapper.append(dailyLabel, dailyTempMax, dailyTempMin, dailyIcon);
@@ -193,16 +181,29 @@ function renderForecast(data) {
 //TODO, use decription and get more advance with icons
 function getWeatherIcon(weather) {
   switch (weather) {
-    case "Clear":
+    case "sky is clear":
       return "content/sunny.png";
-    case "Clouds":
+    case "few clouds":
+      return "content/mostlySunny.png";
+    case "scattered clouds":
+      return "content/partlyCloudy.png";
+    case "broken clouds":
+      return "content/partlyCloudy.png";
+    case "overcast clouds":
       return "content/cloudy.png";
-    case "Rain":
-      return "content/showers.png";
-    case "Thunderstorm":
-      return "content/thunderstorms.png";
-    case "Snow":
+    case "light rain":
+      return "content/lightRain.png";
+    case "moderate rain":
+      return "content/moderateRain.png";
+    case "very heavy rain":
+      return "content/heavyRain.png";
+    case "heavy intensity rain":
+      return "content/heavyIntensityRain.png";
+    case "light snow":
       return "content/snow.png";
+    case "heavy snow":
+      return "content/snow.png";
+    default:
+      return "content/sunny.png";
   }
-  return null;
 }
