@@ -35,6 +35,7 @@ body {
 .main-weather {
   background-color: lightskyblue;
   justify-content: space-between;
+  padding: 16px;
 }
 
 .detail-weather {

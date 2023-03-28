@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
   requestForecast();
 });
 
+//TODO Weather Description, Logo (bonus background)
 // grabs the mock data we have saved for now, assigns it to variable for use
 function getWeather() {
   fetch("mockWeather.json")
@@ -34,6 +35,12 @@ function getWeather() {
         data.sys.sunrise
       );
       document.getElementById("sunset").textContent = getTime(data.sys.sunset);
+      document.getElementById("weather-description").textContent =
+        parseWeatherDescription(data.weather[0].description);
+
+      document.getElementById("weather-icon").src = getWeatherIcon(
+        data.weather[0].description
+      );
     })
     .catch((error) => console.error(error));
 }
@@ -52,6 +59,8 @@ function requestForecast() {
       const filteredData = data.list
         .filter((item) => getTime(item.dt) === "1:00 PM")
         .map((item) => item);
+      // const todaysData = data.list
+      // .filter((item, i)) => [0].includes)
       const lowHighTemp = getLowHighTemp(data);
 
       //Filters through each key in the filteredData JSON object, then applies
@@ -183,6 +192,8 @@ function getWeatherIcon(weather) {
   switch (weather) {
     case "sky is clear":
       return "content/sunny.png";
+    case "clear sky":
+      return "content/sunny.png";
     case "few clouds":
       return "content/mostlySunny.png";
     case "scattered clouds":
@@ -205,5 +216,34 @@ function getWeatherIcon(weather) {
       return "content/snow.png";
     default:
       return "content/sunny.png";
+  }
+}
+
+function parseWeatherDescription(weather) {
+  switch (weather) {
+    case "clear sky":
+      return "Sunny";
+    case "few clouds":
+      return "Partly Sunny";
+    case "scattered clouds":
+      return "Partly Cloudy";
+    case "broken clouds":
+      return "Partly Cloudy";
+    case "overcast clouds":
+      return "Cloudy";
+    case "light rain":
+      return "Light Rain";
+    case "moderate rain":
+      return "Showers";
+    case "very heavy rain":
+      return "Storms";
+    case "heavy intensity rain":
+      return "Thunder Storms";
+    case "light snow":
+      return "Light Snow";
+    case "heavy snow":
+      return "Heavy Snow";
+    default:
+      return "Sunny";
   }
 }
