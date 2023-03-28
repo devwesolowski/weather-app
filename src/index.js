@@ -1,6 +1,4 @@
 const api = "https://api.openweathermap.org/data/2.5";
-const test =
-  "https://api.openweathermap.org/data/2.5/weather?zip=75071&appid=459bd017a00570fbff9c558c8f7a9bce&units=imperial";
 const token = "";
 const zip = 75071;
 const searchbar = document.getElementById("searchbar");
